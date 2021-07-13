@@ -10,25 +10,25 @@ namespace PasswordGenerator
     {
         public static string GeneratePassword(int passSize)
         {
+
+            const string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.<+|&!*-%>?:=";
+
             if (passSize < 0)
             {
                 Console.WriteLine("Your password length must be greater than zero");
                 throw new ArgumentException("length must be greater than zero");
 
             }
-            const string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-            StringBuilder sb = new StringBuilder();
-            Random rnd = new Random();
+            var password = new char[passSize];
+            var rd = new Random();
 
-            for (int i = 0; i < passSize; i++)
+            for (var i = 0; i < passSize; i++)
             {
-                int index = rnd.Next(chars.Length);
-                sb.Append(chars[index]);
+                password[i] = chars[rd.Next(0, chars.Length)];
             }
 
-            return sb.ToString();
-
+            return new String(password);
         }
     }
 }
